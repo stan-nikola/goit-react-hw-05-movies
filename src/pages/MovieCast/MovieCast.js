@@ -9,6 +9,7 @@ import actorPlaceholder from '../../images/actor-placeholder.jpg';
 import { override } from 'constants/loadSpinner';
 import { UpButton, UpButtonIcon } from './MovieCast.styled';
 import { upToTop } from 'constants/upToTop';
+import { SearchNotification } from 'pages/SearchMovies/SearchMovies.styled';
 
 import {
   MovieCastList,
@@ -43,26 +44,39 @@ const MovieCast = () => {
   return (
     <>
       <MovieDetailsTitle>Cast</MovieDetailsTitle>
-      <Box as="ul" display="flex" flexWrap="wrap" gridGap={20} bg="#202021">
-        {movieCredits.cast.map(
-          ({ id, profile_path, original_name, character }) => (
-            <MovieCastList key={id}>
-              {profile_path ? (
-                <MovieCastImg
-                  src={IMAGE_PATH + profile_path}
-                  alt={original_name}
-                  width={120}
-                  height={200}
-                />
-              ) : (
-                <MovieCastImg src={actorPlaceholder} alt={original_name} />
-              )}
-              <MovieActorData>{original_name}</MovieActorData>
-              <MovieActorData>
-                Character: <span>{character}</span>
-              </MovieActorData>
-            </MovieCastList>
+      <Box
+        as="ul"
+        display="flex"
+        justifyContent="center"
+        flexWrap="wrap"
+        gridGap={20}
+        bg="#202021"
+      >
+        {movieCredits.cast.length > 0 ? (
+          movieCredits.cast.map(
+            ({ id, profile_path, original_name, character }) => (
+              <MovieCastList key={id}>
+                {profile_path ? (
+                  <MovieCastImg
+                    src={IMAGE_PATH + profile_path}
+                    alt={original_name}
+                    width={120}
+                    height={200}
+                  />
+                ) : (
+                  <MovieCastImg src={actorPlaceholder} alt={original_name} />
+                )}
+                <MovieActorData>{original_name}</MovieActorData>
+                <MovieActorData>
+                  Character: <span>{character}</span>
+                </MovieActorData>
+              </MovieCastList>
+            )
           )
+        ) : (
+          <SearchNotification>
+            We don't have any casts for this movie.
+          </SearchNotification>
         )}
         <UpButton type="button" onClick={upToTop}>
           <UpButtonIcon />
