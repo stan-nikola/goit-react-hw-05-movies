@@ -92,7 +92,7 @@ const AboutMovie = () => {
           data-testid="loader"
         />
       </Box>
-      <Suspense>
+      <Suspense fallback={null}>
         <Outlet context={[movieId]} />
       </Suspense>
     </Box>
