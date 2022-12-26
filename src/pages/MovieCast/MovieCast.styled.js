@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-
+import { AiFillBackward } from 'react-icons/ai';
 export const MovieDetailsTitle = styled.h2`
   color: white;
   text-transform: uppercase;
@@ -42,5 +42,34 @@ export const MovieActorData = styled.p`
   span {
     font-size: 12px;
     font-weight: 400;
+  }
+`;
+
+export const UpButtonIcon = styled(AiFillBackward)`
+  rotate: 90deg;
+  width: 40px;
+  height: 40px;
+`;
+export const UpButton = styled.button`
+  position: fixed;
+  bottom: 2%;
+  right: 5%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: red;
+  transition: shadow 250ms linear, color 250ms linear,
+    background-color 250ms linear;
+
+  &:hover,
+  &:focus {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+      rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+      rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+
+    color: white;
   }
 `;

@@ -43,14 +43,14 @@ const AboutMovie = () => {
   if (!release_date) return;
 
   return (
-    <>
+    <Box display="flex" flexDirection="column">
       <GoBackLink to={backLinkHref}>
         <span>
           <AiFillBackward />
         </span>
         Go back
       </GoBackLink>
-      <Box display="flex" color="white" mb={30}>
+      <Box display="flex" color="white" justifyContent="center" mb={30}>
         <img
           onLoad={() => setLoading(false)}
           src={IMAGE_PATH + poster_path}
@@ -95,7 +95,7 @@ const AboutMovie = () => {
       <Suspense>
         <Outlet context={[movieId]} />
       </Suspense>
-    </>
+    </Box>
   );
 };
 

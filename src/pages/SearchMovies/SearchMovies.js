@@ -39,8 +39,7 @@ const SearchMovies = () => {
   const handleSubmit = e => {
     e.preventDefault();
     setLoading(true);
-    if (!query.trim()) {
-      alert('No movie');
+    if (!query.trim() || savedQuery === query.trim()) {
       setQuery('');
       setLoading(false);
       return;
@@ -64,15 +63,23 @@ const SearchMovies = () => {
           <AiOutlineSearch />
         </SearchButton>
       </SearchForm>
-      <MovieListRender moviesArr={searchMovies} />
+
       {!savedQuery && (
-        <SearchNotification>Enter movie title to search</SearchNotification>
+        <SearchNotification>Enter movie name to search</SearchNotification>
       )}
+
+      {savedQuery && savedQuery === query.trim() && (
+        <SearchNotification>
+          <span>{savedQuery}</span> successfully found!
+        </SearchNotification>
+      )}
+
       {searchMovies.length <= 0 && savedQuery && (
         <SearchNotification>
           <span> {savedQuery}</span> movie not found
         </SearchNotification>
       )}
+      <MovieListRender moviesArr={searchMovies} />
       <ScaleLoader
         color={'red'}
         loading={loading}

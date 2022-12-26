@@ -2,18 +2,36 @@ import { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { fetchMovieInfo } from 'services/themoviedbApi';
 import { MovieDetailsTitle } from '../MovieCast/MovieCast.styled';
-import { Box } from '@mui/system';
+import ScaleLoader from 'react-spinners/ScaleLoader';
+
+import { Box } from 'components/Box/Box';
 import { MovieReviewsItem } from './MovieReviews.styled';
+import { SearchNotification } from 'pages/SearchMovies/SearchMovies.styled';
+import { override } from 'constants/loadSpinner';
+import { UpButton, UpButtonIcon } from './../MovieCast/MovieCast.styled';
+import { upToTop } from 'constants/upToTop';
 
 const MovieReviews = () => {
   const [movieId] = useOutletContext();
   const [movieReviews, setMovieReviews] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     fetchMovieInfo(movieId, 'reviews').then(resp =>
       setMovieReviews(resp.results)
     );
   }, [movieId]);
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      window.scrollTo({
+        top: 600,
+        left: 0,
+        behavior: 'smooth',
+      });
+      setLoading(false);
+    }, 500);
+  }, [movieReviews]);
 
   if (!movieReviews) return;
 
@@ -29,11 +47,22 @@ const MovieReviews = () => {
             </MovieReviewsItem>
           ))
         ) : (
-          <MovieDetailsTitle>
+          <SearchNotification>
             We don't have any reviews for this movie.
-          </MovieDetailsTitle>
+          </SearchNotification>
         )}
+        <UpButton type="button" onClick={upToTop}>
+          <UpButtonIcon />
+        </UpButton>
       </Box>
+      <ScaleLoader
+        color={'red'}
+        loading={loading}
+        cssOverride={override}
+        size={500}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />
     </>
   );
 };

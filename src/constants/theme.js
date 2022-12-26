@@ -2,14 +2,6 @@ export const Theme = Object.freeze({
   colors: {
     primary: '#ffe4c4de;',
     secondary: '#ebcda2',
-    third: '#ebcda27a',
-    notification: '#fff78b',
-    mainBorder: '#d4b3a6',
-    secondaryBorder: ' #ec6a37',
-    btn: '#2ef0032e',
-    btnAccent: '#2ef00363',
-
-    iconBg: '#000000',
   },
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
 

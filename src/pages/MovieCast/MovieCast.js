@@ -7,6 +7,8 @@ import { IMAGE_PATH } from 'services/themoviedbApi';
 import { Box } from 'components/Box/Box';
 import actorPlaceholder from '../../images/actor-placeholder.jpg';
 import { override } from 'constants/loadSpinner';
+import { UpButton, UpButtonIcon } from './MovieCast.styled';
+import { upToTop } from 'constants/upToTop';
 
 import {
   MovieCastList,
@@ -18,11 +20,10 @@ import {
 const MovieCast = () => {
   const [movieId] = useOutletContext();
   const [movieCredits, setMovieCredits] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchMovieInfo(movieId, 'credits').then(setMovieCredits);
-    // .finally(setLoading(false));
   }, [movieId]);
 
   useEffect(() => {
@@ -50,6 +51,8 @@ const MovieCast = () => {
                 <MovieCastImg
                   src={IMAGE_PATH + profile_path}
                   alt={original_name}
+                  width={120}
+                  height={200}
                 />
               ) : (
                 <MovieCastImg src={actorPlaceholder} alt={original_name} />
@@ -61,7 +64,11 @@ const MovieCast = () => {
             </MovieCastList>
           )
         )}
+        <UpButton type="button" onClick={upToTop}>
+          <UpButtonIcon />
+        </UpButton>
       </Box>
+
       <ScaleLoader
         color={'red'}
         loading={loading}

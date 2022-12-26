@@ -48,7 +48,9 @@ export const SearchButton = styled.button`
 `;
 
 export const SearchNotification = styled.p`
+  text-align: center;
   color: white;
+  margin-bottom: 15px;
   span {
     font-weight: 700;
     text-transform: capitalize;
