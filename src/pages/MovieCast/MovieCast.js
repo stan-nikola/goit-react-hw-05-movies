@@ -75,7 +75,7 @@ const MovieCast = () => {
           )
         ) : (
           <SearchNotification>
-            We don't have any casts for this movie.
+            We don't have any cast for this movie.
           </SearchNotification>
         )}
         <UpButton type="button" onClick={upToTop}>
