@@ -1,16 +1,17 @@
-import { StyledLink, StyledNav } from '../AppBar/AppBar.styled';
+import { StyledLink, StyledLogoLink, StyledNav } from '../AppBar/AppBar.styled';
 import { Box } from 'components/Box/Box';
+import logo from '../../images/logo-movie-logo-film-tape-cinema.png';
 
 export const AppBar = () => {
   return (
     <Box as="header">
       <StyledNav>
-        <StyledLink to="/">
-          <div>Home</div>
-        </StyledLink>
-        <StyledLink to="/movies">
-          <div>Movies</div>
-        </StyledLink>
+        <StyledLogoLink to="/">
+          <img src={logo} alt="logo" width={50} />
+          <span>Movies</span>
+        </StyledLogoLink>
+        <StyledLink to="/">Home</StyledLink>
+        <StyledLink to="/movies">Movies</StyledLink>
       </StyledNav>
     </Box>
   );

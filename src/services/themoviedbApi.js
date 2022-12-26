@@ -15,24 +15,18 @@ export const fetchTrendingMovies = async () => {
   }
 };
 
-export const fetchMovieById = async movieId => {
-  try {
-    const response = await fetch(
-      `${BASE_URL}/3/movie/${movieId}?api_key=${API_KEY}`
-    );
-
-    const data = response.json();
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 export const fetchMovieInfo = async (movieId, info) => {
+  let response = {};
   try {
-    const response = await fetch(
-      `${BASE_URL}/3/movie/${movieId}/${info}?api_key=${API_KEY}`
-    );
+    if (info === '') {
+      response = await fetch(
+        `${BASE_URL}/3/movie/${movieId}?api_key=${API_KEY}`
+      );
+    } else {
+      response = await fetch(
+        `${BASE_URL}/3/movie/${movieId}/${info}?api_key=${API_KEY}`
+      );
+    }
 
     const data = response.json();
     return data;
@@ -40,12 +34,6 @@ export const fetchMovieInfo = async (movieId, info) => {
     console.log(error);
   }
 };
-
-export function fetchMovies(inputtedName) {
-  return fetch(
-    `${FETCH_BY_NAME_PATH}?api_key=${API_KEY}&query=${inputtedName}`
-  ).then(response => response.json());
-}
 
 export const fetchMovieByName = async query => {
   try {
