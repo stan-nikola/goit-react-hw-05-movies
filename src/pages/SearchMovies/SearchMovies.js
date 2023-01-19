@@ -21,7 +21,7 @@ const SearchMovies = () => {
   const [searchMovies, setSearchMovies] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const savedQuery = searchParams.get('query') ?? '';
+  let savedQuery = searchParams.get('query') ?? '';
 
   useEffect(() => {
     if (!savedQuery) {
@@ -29,22 +29,22 @@ const SearchMovies = () => {
 
       return;
     }
-    fetchMovieByName(savedQuery).then(resp => setSearchMovies(resp.results));
+    fetchMovieByName(savedQuery).then(resp => {
+      setSearchMovies(resp.results);
+      setLoading(false);
+    });
   }, [savedQuery]);
-
-  useEffect(() => {
-    setLoading(false);
-  }, [searchMovies]);
 
   const handleSubmit = e => {
     e.preventDefault();
     setLoading(true);
-    if (!query.trim() || savedQuery === query.trim()) {
+    if (!query.trim() || savedQuery === query.trim().toLowerCase()) {
       setQuery('');
+
       setLoading(false);
       return;
     }
-    setSearchParams({ query: query.trim() });
+    setSearchParams({ query: query.trim().toLowerCase() });
     setQuery('');
   };
 
@@ -68,11 +68,12 @@ const SearchMovies = () => {
         <SearchNotification>Enter movie name to search</SearchNotification>
       )}
 
-      {savedQuery && savedQuery === query.trim() && (
-        <SearchNotification>
-          <span>{savedQuery}</span> successfully found!
-        </SearchNotification>
-      )}
+      {savedQuery &&
+        savedQuery.toLowerCase() === query.trim().toLowerCase() && (
+          <SearchNotification>
+            <span>{savedQuery}</span> successfully found!
+          </SearchNotification>
+        )}
 
       {searchMovies.length <= 0 && savedQuery && (
         <SearchNotification>

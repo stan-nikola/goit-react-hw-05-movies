@@ -10,13 +10,12 @@ const Home = () => {
 
   useEffect(() => {
     fetchTrendingMovies()
-      .then(resp => setTrendMovies(resp.results))
+      .then(resp => {
+        setTrendMovies(resp.results);
+        setLoading(false);
+      })
       .finally(setLoading(true));
   }, []);
-
-  useEffect(() => {
-    setLoading(false);
-  }, [trendMovies]);
 
   return (
     <>

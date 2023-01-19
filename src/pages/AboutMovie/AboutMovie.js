@@ -24,6 +24,8 @@ const AboutMovie = () => {
 
   const backLinkHref = location.state?.from ?? '/';
 
+
+
   useEffect(() => {
     fetchMovieInfo(movieId, '').then(setMovieData);
     window.scrollTo({
